@@ -3,7 +3,7 @@
 library(BacDive)
 
 ## initialize BacDive client
-bacdive <- open_bacdive("isabel.schober@dsmz.de", "password")
+bacdive <- open_bacdive("test@test.de", "password")
 
 ## fetch strain data with a BacDive ID
 one_strain <- fetch(object = bacdive, ids = 5621)
