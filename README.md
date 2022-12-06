@@ -21,13 +21,13 @@ For all requests, the requested data is returned in JSON format with the followi
 
 When data for a large number of strains is delivered, the results are paginated at 100 strains per page (JSON file).
 
-#### Endpoints
+### Endpoints
 
 The Bac*Dive* API has five different endpoints (network locations) that can be used to send requests and receive data.
 
 The endpoints can be tested in the browser by adding the name of the desired endpoint to the Bac*Dive* API URL and then specifying the query.
 
-##### fetch
+#### fetch
 
 API requests to this endpoint are made by Bac*Dive* ID and return all Bac*Dive* information on the strain(s). All other endpoints return Bac*Dive* IDs that can then in turn be searched using fetch.
 
@@ -41,13 +41,25 @@ Data for several Bac*Dive* strains can be requested at the same time when their 
 Browser example:      
 https://api.bacdive.dsmz.de/fetch/5621;139709
 
-##### culturecollectionno
+#### culturecollectionno
 
 API requests to this endpoint are made by culture collection number and return Bac*Dive* IDs.
 
 Browser example:     
 [https://api.bacdive.dsmz.de/culturecollectionno/DSM 2801](https://api.bacdive.dsmz.de/culturecollectionno/DSM%202801)
 
+#### taxon
+
+API requests to this endpoint are made by genus, species or subspecies name and return Bac*Dive* IDs of all strains present for that taxon in the Bac*Dive* database.
+
+Browser example for a genus name:      
+https://api.bacdive.dsmz.de/taxon/Myroides
+
+Browser example for a species name:      
+https://api.bacdive.dsmz.de/taxon/Myroides/odoratus
+
+Browser example for a subspecies name:   
+https://api.bacdive.dsmz.de/taxon/Myroides/odoratimimus/xuanwuensis
 
 --------------------------
 
