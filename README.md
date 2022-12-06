@@ -50,7 +50,7 @@ Browser example:
 
 #### taxon
 
-API requests to this endpoint are made by genus, species or subspecies name and return Bac*Dive* IDs of all strains present for that taxon in the Bac*Dive* database.
+API requests to this endpoint are made by genus, species or subspecies name and return the Bac*Dive* IDs of all strains present for that taxon in the Bac*Dive* database.
 
 Browser example for a genus name:      
 https://api.bacdive.dsmz.de/taxon/Myroides
@@ -60,6 +60,20 @@ https://api.bacdive.dsmz.de/taxon/Myroides/odoratus
 
 Browser example for a subspecies name:   
 https://api.bacdive.dsmz.de/taxon/Myroides/odoratimimus/xuanwuensis
+
+#### sequence_16s
+
+API requests to this endpoint are made by 16S rRNA gene nucleotide accession numbers and return Bac*Dive* IDs.
+
+Browser example:        
+https://api.bacdive.dsmz.de/sequence_16s/M58777
+
+#### sequence_genome
+
+API requests to this endpoint are made by genome assembly accession numbers and return Bac*Dive* IDs.
+
+Browser example:        
+https://api.bacdive.dsmz.de/sequence_genome/GCA_000243275
 
 --------------------------
 
