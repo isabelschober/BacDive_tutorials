@@ -19,6 +19,7 @@ For all requests, the requested data is returned in JSON format with the followi
 * **previous** - URL to previous page if results are paginated, otherwise 'null'
 * **results** - Requested data
 
+When data for a large number of strains is delivered, the results are paginated at 100 strains per page (JSON file).
 
 #### Endpoints
 
@@ -33,7 +34,20 @@ API requests to this endpoint are made by Bac*Dive* ID and return all Bac*Dive* 
 Browser example:     
 https://api.bacdive.dsmz.de/fetch/5621
 
-Several IDs can be looked up at the same time when delimited by semicolon. There is a limit of 100 IDs per call.
+A detailed explanation of the data fields in the delivered JSON file can be found [here](https://api.bacdive.dsmz.de/strain_fields_information).
+
+Data for several Bac*Dive* strains can be requested at the same time when their IDs are delimited by semicolons. There is a limit of 100 IDs per call.
+
+Browser example:      
+https://api.bacdive.dsmz.de/fetch/5621;139709
+
+##### culturecollectionno
+
+API requests to this endpoint are made by culture collection number and return Bac*Dive* IDs.
+
+Browser example:     
+[https://api.bacdive.dsmz.de/culturecollectionno/DSM 2801](https://api.bacdive.dsmz.de/culturecollectionno/DSM%202801)
+
 
 --------------------------
 
