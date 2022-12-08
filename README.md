@@ -1,14 +1,12 @@
+1. [The Bac*Dive* API](#the-bacdive-api)                 
+        1.1. [APIs](#apis)              
+        1.2. [The Bac*Dive* API](#the-bacdive-api-1)              
+        1.3. [Endpoints](#endpoints)            
+2. [The Bac*Dive* R Package]()
+        2.1. Installation
+
 
 ## The Bac*Dive* API
-
-1. [APIs](#apis)              
-2. [The Bac*Dive* API](#the-bacdive-api-1)              
-3. [Endpoints](#endpoints)            
-  3.1. [fetch](#fetch)                  
-  3.2. [culturecollectionno](#culturecollectionno)                
-  3.3. [taxon](#taxon)                   
-  3.4. [sequence_16s](#sequence_16s)                      
-  3.2. [sequence_genome](#sequence_genome)
 
 ### APIs
 
@@ -84,6 +82,18 @@ Browser example:
 https://api.bacdive.dsmz.de/sequence_genome/GCA_000243275
 
 
+
+## The Bac*Dive* R Package 
+
+### Installation
+
+The Bac*Dive* R Package  can be found at https://r-forge.r-project.org/R/?group_id=1573.
+
+It can be installed within an R session using the install.packages() function.
+
+```R
+install.packages("BacDive", repos="http://R-Forge.R-project.org")
+```
 
 
 
