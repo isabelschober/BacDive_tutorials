@@ -24,11 +24,11 @@ head(two_strains_df)
 ## request BacDive ID in search with culture collection number
 id <- request(object = bacdive, query = "DSM 2801", search = "deposit")
 ## the received BacDive ID is in id$result
-id$result
+id$results
 
 ## request BacDive ID in search with 16S gene accession number
 id <- request(object = bacdive, query = "M58777", search = "16S")
-id$result
+id$results
 
 ## request BacDive IDs in search with taxon name
 ids <- request(object = bacdive, query = "Myroides odoratus", search = "taxon")
