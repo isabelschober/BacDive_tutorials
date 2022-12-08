@@ -1,6 +1,12 @@
 
 ## The Bac*Dive* API
 
+1. [APIs](#apis)              
+2. [The Bac*Dive* API](#the-bacdive-api-1)              
+3. [Endpoints](#endpoints)            
+  3.1. [fetch](#fetch)
+  3.2. [culturecollectionno](#culturecollectionno)
+
 ### APIs
 
 An API (Application Programming Interface) is a set of procedures that allows two applications to communicate with each other. These procedures can be used to write code that communicates with another application, like a software or a website like Bac*Dive*. Through API procedures, requests to websites can be automated.
