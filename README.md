@@ -3,8 +3,10 @@
         1.2. [The Bac*Dive* API](#the-bacdive-api-1)              
         1.3. [Endpoints](#endpoints)            
         
-2. [The Bac*Dive* R Package](#the-bacdive-r-package)             
-        2.1. [Installation](#installation)
+2. [The Bac*Dive* R Package](#the-bacdive-r-package)                   
+        2.1. [Installation](#installation)               
+        2.2. [Initialization](#initialization)              
+        2.3. [R functions](#r-functions)
 
 
 ## The Bac*Dive* API
@@ -95,8 +97,35 @@ It can be installed within an R session using the install.packages() function.
 ```R
 install.packages("BacDive", repos="http://R-Forge.R-project.org")
 ```
+### Initialization
 
+The Bac*Dive* client is initialized using the open_bacdive() function with your login data.
 
+```R
+bacdive <- open_bacdive("test@test.de", "password")
+```
+### R functions
 
+#### fetch()
 
+The fetch() function implements a request to the fetch endpoint of the API.
 
+As parameters, the fetch function takes the client object, initialized earlier, and one or more Bac*Dive* IDs.
+
+```R
+one_strain <- fetch(object = bacdive, ids = 5621)
+```
+```R
+two_strains <- fetch(object = bacdive, ids = 5621, 139709)
+```
+
+The returned strain information is stored in the $results field
+```R
+one_strain$results
+```
+
+For easier handling, the output can be transformed to a data frame.
+```R
+two_strains_df <- as.data.frame(two_strains)
+```
+The main strain data categories are then stored in different columns of the data frame, the searched strains are represented by different rows.
