@@ -110,7 +110,7 @@ bacdive <- open_bacdive("test@test.de", "password")
 
 The fetch() function implements a request to the fetch endpoint of the API.
 
-As parameters, the fetch function takes the client object, initialized earlier, and one or more Bac*Dive* IDs.
+As parameters, the fetch() function takes the client object, initialized earlier, and one or more Bac*Dive* IDs.
 
 ```R
 one_strain <- fetch(object = bacdive, ids = 5621)
@@ -119,7 +119,7 @@ one_strain <- fetch(object = bacdive, ids = 5621)
 two_strains <- fetch(object = bacdive, ids = 5621, 139709)
 ```
 
-The returned strain information is stored in the $results field
+The returned strain information is stored in the $results field.
 ```R
 one_strain$results
 ```
@@ -129,3 +129,32 @@ For easier handling, the output can be transformed to a data frame.
 two_strains_df <- as.data.frame(two_strains)
 ```
 The main strain data categories are then stored in different columns of the data frame, the searched strains are represented by different rows.
+
+#### request()
+
+The request() function implements requests to the four other endpoints of the BacDive API.
+
+As parameters, the request() function takes the client object, a query and a search parameter specifying the queried endpoint.
+
+A request to the culturecollectionno ("deposit") endpoint:
+```R
+id <- request(object = bacdive, query = "DSM 2801", search = "deposit")
+```
+
+The returned Bac*Dive* ID can be found in the $results field
+```R
+id$results
+```
+A request to the sequence_16s ("16S") endpoint:
+```R
+id <- request(object = bacdive, query = "M58777", search = "16S")
+id$results
+```
+
+A request to the sequence_genome ("genome") endpoint:
+```R
+id <- request(object = bacdive, query = "GCA_006094295", search = "genome")
+id$results
+```
+
+#### retrieve()
