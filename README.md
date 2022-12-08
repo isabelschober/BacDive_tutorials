@@ -4,10 +4,10 @@
 1. [APIs](#apis)              
 2. [The Bac*Dive* API](#the-bacdive-api-1)              
 3. [Endpoints](#endpoints)            
-  3.1. [fetch](#fetch)                 
-  3.2. [culturecollectionno](#culturecollectionno)
-  3.3. [taxon](#taxon)
-  3.4. [sequence_16s](#sequence_16s)
+  3.1. [fetch](#fetch)                  
+  3.2. [culturecollectionno](#culturecollectionno)                
+  3.3. [taxon](#taxon)                   
+  3.4. [sequence_16s](#sequence_16s)                      
   3.2. [sequence_genome](#sequence_genome)
 
 ### APIs
