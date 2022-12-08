@@ -1,5 +1,3 @@
-# Bac*Dive* Tutorials
-
 
 ## The Bac*Dive* API
 
@@ -78,9 +76,7 @@ https://api.bacdive.dsmz.de/sequence_genome/GCA_000243275
 
 
 
-## The Bac*Dive* Python Package 
 
-https://pypi.org/project/bacdive/
 
 
 
