@@ -2,8 +2,8 @@
         1.1. [APIs](#apis)              
         1.2. [The Bac*Dive* API](#the-bacdive-api-1)              
         1.3. [Endpoints](#endpoints)            
-2. [The Bac*Dive* R Package]()
-        2.1. Installation
+2. [The Bac*Dive* R Package](#the-bacdive-r-package)             
+        2.1. Installation(#installation)
 
 
 ## The Bac*Dive* API
