@@ -211,7 +211,8 @@ for (i in 1:nrow(strains_df)){
 num_type
 ```
 
-In a second example the Bac*Dive* IDs of a number of DSM strains are looked up, in this case the strains DSM 1 to DSM 20.           
+In a second example the Bac*Dive* IDs of a number of DSM strains are looked up, in this case the strains DSM 1 to DSM 20.       
+After the initialization of an output data frame, a for-loop goes through the numbers 1 to 20. The prefix "DSM" is added to each number to make the DSM indentifier , which is then used as query in a request to the culturecollectionno endpoint. If the DSM strain is present in Bac*Dive*, the count field of the received output says '1' and the BacDive ID is saved to the data frame. Otherwise, an 'NA' is put into the respective field.
 
 ```R
 DSM_BacDive <- data.frame(matrix(ncol=2,nrow=20))
