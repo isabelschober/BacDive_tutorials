@@ -211,6 +211,8 @@ for (i in 1:nrow(strains_df)){
 num_type
 ```
 
+In a second example the Bac*Dive* IDs of a number of DSM strains are looked up, in this case the strains DSM 1 to DSM 20.           
+
 ```R
 DSM_BacDive <- data.frame(matrix(ncol=2,nrow=20))
 colnames(DSM_BacDive) <- c("DSM Number","BacDive ID")
