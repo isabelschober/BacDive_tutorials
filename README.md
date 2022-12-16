@@ -6,7 +6,8 @@
 2. [The Bac*Dive* R Package](#the-bacdive-r-package)                   
         2.1. [Installation](#installation)               
         2.2. [Initialization](#initialization)              
-        2.3. [R functions](#r-functions)
+        2.3. [R functions](#r-functions)         
+        2.4. [Examples](#examples)
 
 
 ## The Bac*Dive* API
@@ -157,4 +158,74 @@ id <- request(object = bacdive, query = "GCA_006094295", search = "genome")
 id$results
 ```
 
+The taxon endpoint differs from the culturecollectionno and sequence endpoints as a request usually returns not just one, but several Bac*Dive* IDs.
+
+In the following example request to the taxon ("taxon") endpoint using the species name *Myroides odoratus*, the count field of the output shows that 19 strains of this species are present in the database. The results field contains all 19 Bac*Dive* IDs.
+```R
+ids <- request(object = bacdive, query = "Myroides odoratus", search = "taxon")
+ids
+ids$results
+```
+In another example using the genus name *Myroides*, the count field correctly notes 106 strains for this genus in Bac*Dive*, but the results field does not contain all their Bac*Dive* IDs. **The request() function cannot return more than 100 Bac*Dive* IDs.** This is due to the pagination of the API, which limits output JSON files to 100 IDs per page. The request() function only returns the results from teh first page.
+```R
+ids <- request(object = bacdive, query = "Myroides", search = "taxon")
+ids
+ids$results
+```
+The request() function is useful in cases in which you want to receive only Bac*Dive* IDs and no further information on the strains and in which you know that your request will not return more than 100 IDs at a time.
+
+In other cases, the retrieve() function should be used.
+
 #### retrieve()
+
+The retrieve() function can retrieve data directly using non BacDive IDs and taxon names. It can retrieve data for any number of strains without the limitation of the request() function. 
+
+As parameters, the retrieve() function takes the client object, a query and a search parameter specifying the queried endpoint.     
+Here the taxon enpoint is again queried for the genus *Myroides*.
+```R
+strains <- retrieve(object = bacdive, query = "Myroides", search = "taxon")
+strains
+```
+Data for all 106 strains is retrieved and can now be transformed into a data frame with one row for each strain.
+```R
+strains_df <- as.data.frame(strains)
+nrow(strains_df)
+```
+
+### Examples
+
+With the available data on all *Myroides* strains now stored in a data frame, specific data fields can be looked up.
+
+In this example, the number of *Myroides* strains, which are type strains for their species is counted, by iterating through the rows of the data frame and asking whether the type strain field is filled with a 'yes'.
+
+```R
+#strains <- retrieve(object = bacdive, query = "Myroides", search = "taxon")
+#strains_df <- as.data.frame(strains)
+
+num_type=0
+for (i in 1:nrow(strains_df)){
+  if (strains_df[["Name and taxonomic classification"]][i][[1]][["type strain"]]=="yes"){
+    num_type=num_type+1
+  }
+}
+num_type
+```
+
+```R
+DSM_BacDive <- data.frame(matrix(ncol=2,nrow=20))
+colnames(DSM_BacDive) <- c("DSM Number","BacDive ID")
+
+for (i in 1:20){
+  DSM_num <- paste("DSM", i, sep = " ")
+  ret <- request(object = bacdive, query = DSM_num, search = "deposit")
+  DSM_BacDive[i,1] <- DSM_num
+  if (ret$count==1){
+    DSM_BacDive[i,2] <- ret$results[1]
+  }
+  else{
+    DSM_BacDive[i,2] <- NA
+  }
+}
+
+DSM_BacDive
+```
