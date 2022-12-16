@@ -35,7 +35,7 @@ ids <- request(object = bacdive, query = "Myroides odoratus", search = "taxon")
 ids
 ids$results
 
-## Maximum 100 entries are stored in bac1$results!!!
+## Maximum 100 entries are stored in ids$results!!!
 ## The total number of entries can be see in bac1$count.
 ids <- request(object = bacdive, query = "Myroides", search = "taxon")
 ids
