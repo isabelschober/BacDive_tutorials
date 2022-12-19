@@ -9,6 +9,12 @@
         2.3. [R functions](#r-functions)         
         2.4. [Examples](#examples)
 
+3. [The Bac*Dive* Python Package](#the-bacdive-python-package)               
+        3.1. [Installation](#installation-1)           
+        3.2. [Initialization](#initialization-1)
+        3.3. [Python Methods: Search and Retrieve](python-methods-search-and-retrieve)
+        3.4. [Examples](#examples-1)
+            
 
 ## The Bac*Dive* API
 
@@ -340,3 +346,35 @@ for strain in client.retrieve(["full scientific name","culture medium"]):
 
 ### Example
 
+Again, the BacDive IDs of a number of DSM strains 1 to 20 are looked up.
+
+```Python
+# loop through the numbers 1 to 20
+for i in range(1,21):
+    # addition of prefix DSM to number
+    DSM_num="DSM "+str(i)
+    # print out of the DSM identifier
+    print(DSM_num, end="\t")
+    # API request
+    result=client.search(culturecolno=DSM_num)
+    # if the request returned a result > print out the BacDive ID
+    if result:
+        for strain in client.retrieve(["BacDive-ID"]):
+            print(list(strain)[0])
+```
+
+
+In the second example, all the strains of the genus *Myroides* are again searched. Then, I want to now which species these strains belong to.
+
+```Python
+# API search for all Myroides strains
+client.search(taxonomy="Myroides")
+# initialization of output list
+species=[]
+# for each Myroides strain, the species information is retrieved and appended to the output list
+for strain in client.retrieve(["species"]):
+    species.append(strain[list(strain)[0]][0]["species"])
+# the Counter function from the collection package is imported and used to count the number of instances of each species name in the output list 
+from collections import Counter
+print(Counter(species))
+```
