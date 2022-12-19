@@ -103,6 +103,8 @@ install.packages("BacDive", repos="http://R-Forge.R-project.org")
 The Bac*Dive* client is initialized using the open_bacdive() function with your login data.
 
 ```R
+library(BacDive)
+
 bacdive <- open_bacdive("test@test.de", "password")
 ```
 ### R functions
@@ -202,8 +204,11 @@ In this example, the number of *Myroides* strains, which are type strains for th
 #strains <- retrieve(object = bacdive, query = "Myroides", search = "taxon")
 #strains_df <- as.data.frame(strains)
 
+# initialization of numerator
 num_type=0
+# loop through all rows of data frame containing data on all Myroides strains
 for (i in 1:nrow(strains_df)){
+  # check if 'type strain' field is 'yes' > if it is add +1 to numerator
   if (strains_df[["Name and taxonomic classification"]][i][[1]][["type strain"]]=="yes"){
     num_type=num_type+1
   }
@@ -215,16 +220,23 @@ In a second example the Bac*Dive* IDs of a number of DSM strains are looked up, 
 After the initialization of an output data frame, a for-loop goes through the numbers 1 to 20. The prefix "DSM" is added to each number to make the DSM indentifier , which is then used as query in a request to the culturecollectionno endpoint. If the DSM strain is present in Bac*Dive*, the count field of the received output says '1' and the BacDive ID is saved to the data frame. Otherwise, an 'NA' is put into the respective field.
 
 ```R
+# initialization of output data frame
 DSM_BacDive <- data.frame(matrix(ncol=2,nrow=20))
 colnames(DSM_BacDive) <- c("DSM Number","BacDive ID")
 
+# loop through numbers 1 to 20
 for (i in 1:20){
+  # addition of prefix DSM to number
   DSM_num <- paste("DSM", i, sep = " ")
+  # request to BaDive API
   ret <- request(object = bacdive, query = DSM_num, search = "deposit")
+  # addition DSM identifier to output data frame
   DSM_BacDive[i,1] <- DSM_num
+  # if the API request returned a result > addition of BacDive ID to output data frame
   if (ret$count==1){
     DSM_BacDive[i,2] <- ret$results[1]
   }
+  # if no result was returned > addition of NA to output data frame
   else{
     DSM_BacDive[i,2] <- NA
   }
@@ -232,3 +244,79 @@ for (i in 1:20){
 
 DSM_BacDive
 ```
+
+## The Bac*Dive* Python package
+
+### Installation 
+
+The Bac*Dive* Python package is available in the Python Package Index (PyPI): https://pypi.org/project/bacdive/.            
+
+It can be installed in a UNIX terminal using the pip installer.
+
+```bash
+pip install bacdive
+```
+
+### Initialization
+
+The Bac*Dive* client needs to be initialized with your login data.
+
+```Python
+import bacdive
+
+client = bacdive.BacdiveClient('test@test.de', 'password')
+```
+
+### Python methods: search and retrieve
+
+The 'search' method takes BacDive IDs, other IDs or taxon names and fetches and stores all BacDive IDs that are found for this query.
+
+This is an example for a search with a Bac*Dive* ID using the 'id' parameter:
+```Python
+client.search(id="5621")
+```
+The function returns a '1', showing that it stored one Bac*Dive* ID.
+
+The actual data for the strains whose IDs were stored with the 'search' method can then be retrieved using the 'retrieve' method.
+
+```Python
+for strain in client.retrieve():
+    print(strain)
+```
+
+The method returns a nested dictionary that contains all the information on the strains that are in Bac*Dive* and that you could also see on the Bac*Dive* website if you would search for the strain there.
+
+This also works with more than one Bac*Dive* ID.
+
+Example using two Bac*Dive* IDs and printing out only the general information on the strains when using the 'retrieve' method:
+```Python
+client.search(id="5621;138170")
+
+for strain in client.retrieve():
+    print(strain["General"])
+```
+For API requests with taxon names, the 'taxonomy'parameter is used in the 'search' method.
+
+Example with a genus name:
+```Python
+client.search(taxonomy="Myroides")
+```
+All the BacDive IDs for the genus *Myroides* strains that are present in the BacDive database are stored.
+
+Example with a species name:
+```Python
+client.search(taxonomy="Myroides odoratus")
+```
+
+Again all the BacDive IDs of strains of this species that are present in the BacDive database are stored.
+
+Instead of retrieving the complete data on the strains and then using only a small part of it, as in the previous example, the 'retrieve' function can also be used with filters by specifying which information shall be retrieved.
+
+For this, a list of keys specifying the data fields to be retrieved is added to the 'retrieve' function as parameter.
+
+In this example only the culture collection numbers of the previously searched *Myroides odoratus* strains are retrieved:
+```Python
+for strain in client.retrieve(["culture collection no."]):
+    print(strain)
+```
+
