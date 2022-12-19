@@ -319,4 +319,24 @@ In this example only the culture collection numbers of the previously searched *
 for strain in client.retrieve(["culture collection no."]):
     print(strain)
 ```
+Of course this can also be done the other way round. This example shows a search with a culture collection number. In this case, another filter is given in the 'retrieve' method: the taxonomic family information.
+
+```Python
+client.search(culturecolno="DSM 100861")
+
+for strain in client.retrieve(["family"]):
+    print(strain)
+```
+The DSM strain belongs to the family *Flavobacteriaceae*.
+
+Information on the same strains can again be retrieved with other filters.
+
+In this example, a list of two filters is given in the 'retrieve' function, they are the full scientific name field and the information that the stored in the culture medium field.
+
+```Python
+for strain in client.retrieve(["full scientific name","culture medium"]):
+    print(strain)
+```
+
+### Example
 
