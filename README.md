@@ -11,8 +11,8 @@
 
 3. [The Bac*Dive* Python Package](#the-bacdive-python-package)               
         3.1. [Installation](#installation-1)           
-        3.2. [Initialization](#initialization-1)
-        3.3. [Python Methods: Search and Retrieve](python-methods-search-and-retrieve)
+        3.2. [Initialization](#initialization-1)           
+        3.3. [Python Methods: Search and Retrieve](python-methods-search-and-retrieve)                      
         3.4. [Examples](#examples-1)
             
 
