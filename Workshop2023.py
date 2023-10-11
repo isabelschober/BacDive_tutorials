@@ -104,7 +104,22 @@ response=requests.get("https://mediadive.dsmz.de/rest/medium-strains/"+str(md_id
 print(response.json())
 
 
-### Example
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Example using all three APIs
 
 # load API request packages
 import requests
@@ -148,7 +163,7 @@ for strain in client.retrieve():
     else:
         other_des=""
     
-    # use the MediaDive API to store a Medium ID of a medium for the strain, if present in MediaDive
+    # use the MediaDive API to store a Medium ID of a medium for the strain, if present in MediaDive (unfortunately most are not in this case)
     response=requests.get("https://mediadive.dsmz.de/rest/strain/bacdive/"+str(bd_id))
     if response.json()["status"]==200:
         md_id=str(response.json()["data"]["media"][0]["medium_id"])
