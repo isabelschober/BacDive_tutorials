@@ -112,13 +112,6 @@ print(response.json())
 
 
 
-
-
-
-
-
-
-
 ### Example using all three APIs
 
 # load API request packages
