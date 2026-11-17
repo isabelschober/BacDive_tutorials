@@ -3,7 +3,7 @@
 import math
 import requests
 
-# BacDive API Example:
+# Example query for the new BacDive API beta version (2026-11-17)
 # For all strains that have linked INSDC genomes
 # get the genome accession(s) of the best scoring genome
 
